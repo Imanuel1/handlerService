@@ -4,10 +4,12 @@ const socketInit = () => {
     console.log("inside socket init");
     io.on('connection', (socket) => {
         console.log('ws connected');
+        socket.broadcast.emit('orderUpdated', { orderId: 'RVYBO7zOeU', tableNumber: 9, status: 'orderUpdated' });  // Emit to all except sender
 
         socket.on('orderUpdate', (msg) => {
             console.log("this is listening msg", msg);
             // socketEmit(msg)
+            socket.broadcast.emit('orderUpdated', msg);  // Emit to all except sender
         });
 
         socket.on('disconnect', () => {
@@ -17,7 +19,7 @@ const socketInit = () => {
 }
 
 const socketEmit = (orderUpdate) => {
-    io.emit('orderUpdate', orderUpdate); // This will emit the event to all connected sockets
+    io.emit('orderUpdated', orderUpdate); // This will emit the event to all connected sockets
 }
 
 const socketListening = (orderUpdate) => {

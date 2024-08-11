@@ -8,3 +8,4 @@ if (envResult.error && NODE_ENV === "development") {
 }
 
 export const PORT = process.env.PORT ?? 8080;
+export const clientUrl = process.env.CLIENT_URL ?? "";

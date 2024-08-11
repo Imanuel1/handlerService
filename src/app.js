@@ -10,7 +10,11 @@ import { socketInit } from "./middlewares/socket.js";
 
 const app = express();
 const httpServer = createServer(app)
-export const io = new Server(httpServer);
+export const io = new Server(httpServer, {
+    cors: {
+        origin: 'http://localhost:3000', // Replace with your client URL
+    }
+});
 
 app
     .use(cors())
