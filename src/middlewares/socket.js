@@ -4,7 +4,6 @@ const socketInit = () => {
     console.log("inside socket init");
     io.on('connection', (socket) => {
         console.log('ws connected');
-        socket.broadcast.emit('orderUpdated', { orderId: 'RVYBO7zOeU', tableNumber: 9, status: 'orderUpdated' });  // Emit to all except sender
 
         socket.on('orderUpdate', (msg) => {
             console.log("this is listening msg", msg);
